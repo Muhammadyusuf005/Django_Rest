@@ -5,6 +5,7 @@ from rest_framework import authentication, permissions, status
 from rest_framework.exceptions import PermissionDenied
 
 from myapp.models import Account
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from myapp.serializers import AccountCreateSerializer, AccountSerializer
 
 
@@ -16,8 +17,6 @@ class AccountCreateGenericApiView(generics.ListCreateAPIView):
     *Anybody is able to access this view.
     """
 
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.AllowAny]
 
     queryset = Account.objects.all()
     serializer_class = AccountCreateSerializer
@@ -30,7 +29,7 @@ class AccountListGenericApiView(generics.ListAPIView):
     *Anybody is able to access this view.
     """
 
-    authentication_classes = [authentication.TokenAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [permissions.AllowAny]
 
     queryset = Account.objects.all()
@@ -40,7 +39,7 @@ class AccountDeleteGenericsApiView(generics.RetrieveDestroyAPIView):
     """
     This class is used to delete Account objects !
     """
-    authentication_classes = [authentication.TokenAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [permissions.AllowAny]
 
     lookup_field = 'guid'
@@ -56,7 +55,7 @@ class AccountDetailGenericsApiView(generics.RetrieveUpdateDestroyAPIView):
     """
     This class is used for detail information about Account objects(get,put,delete)!
     """
-    authentication_classes = [authentication.TokenAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [permissions.AllowAny]
 
     lookup_field = 'guid'

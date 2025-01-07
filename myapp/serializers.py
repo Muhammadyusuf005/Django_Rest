@@ -26,7 +26,7 @@ class AccountCreateSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         """
-        This method is used for hashing password when creating new account!
+        This method is used for hashing password when updating existing account!
         """
         if instance.password != validated_data['password']:
             validated_data['password'] = make_password(validated_data['password'])
